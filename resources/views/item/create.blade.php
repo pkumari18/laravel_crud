@@ -20,6 +20,7 @@
         </ul>
       </div><br />
     @endif
+    
       <form method="post" action="{{ route('shares.store') }}">
           <div class="form-group">
               @csrf
