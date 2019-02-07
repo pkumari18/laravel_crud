@@ -13,7 +13,7 @@ class CreateItemQuantitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_quantities', function (Blueprint $table) {
+           Schema::create('item_quantities', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('item_id');
             $table->integer('location_id');

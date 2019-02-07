@@ -40,15 +40,28 @@
             <div class="col sm-6">
           
              <!--  <input id="category"  type="text" class="form-control" placeholder="category">  -->
-                  <div class="form-group">
-                        <label>Select  category:</label>
-                        <select class="form-control" id="type" name="type" >
-                         <option value="">Please Select</option>
-                         <option value=""></option>
-                         <option value=""></option>
-                       </select>
-                     </div>
-            </div></div>
+                 <div class="form-group">
+                       <label>Select  category:</label>
+                  
+                   <select class="form-control" id="type" name="type" >
+                     <option value="">Please Select</option>
+                     <option value=""></option>
+                     <option value=""></option>
+                     </select>
+                     
+            </div>
+              <!--  <div class="form-group">
+                              
+                                   <select class="form-control" name="id">
+                               @foreach($category as $category)
+                               <option value="{{$category->id}}">{{$category->id}}</option>
+                              @endforeach
+                             </select>
+                                            </div> -->
+
+
+
+          </div></div>
             <div class="row">
               <div class="col sm-6">
                 <label>Model</label>
@@ -117,12 +130,12 @@
    <script>
     $(document).ready( function () {
       $('#myTable').DataTable();
-      $('#name').on('change', function(){
+     /* $('#name').on('change', function(){
      let type = $(this).val();
      $.get('/dashboard/'+ type, function(data){
        $('#category').html(data);
      });
-});
+});*/
 
     } );
 

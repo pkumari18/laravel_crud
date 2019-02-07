@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Items;
-
+use app\Category;
 class ItemsController extends Controller
 {
     /**
@@ -13,9 +13,9 @@ class ItemsController extends Controller
      */
     public function index()
     {
-    
-      $items = Items::all();
-      return view('item.index', compact('items'));
+       $category = Category::all(['id', 'name']);
+         $items = Items::all();
+      return view('item.index', compact('items','category'));
     }
 
     public function store(Request $request)
@@ -92,8 +92,8 @@ class ItemsController extends Controller
 
      return redirect('/item')->with('success', 'Stock has been deleted Successfully');
      }
-       public function fetch($name) {
+       /*public function fetch($name) {
         $category = DB::table('category')->where('id', $name)->get();
         return view('dashboard/categorydrop', compact('category'));
-     }
+     }*/
    }
