@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Items;
-use app\Category;
+use App\Category;
+use App\DB;
 class ItemsController extends Controller
 {
     /**
@@ -13,23 +14,42 @@ class ItemsController extends Controller
      */
     public function index()
     {
-       $category = Category::all(['id', 'name']);
+
+       $category= Category::all();
          $items = Items::all();
       return view('item.index', compact('items','category'));
     }
-
-    public function store(Request $request)
+   public function create()
     {
-        // return $request->all();
-         $item = new Items;
-         $item->name = $request->name;
-         $item->category_id = 1;
-         $item->model = $request->model;
-         $item->description = $request->description;
-         $item->save();
-
-         return $item;
+           $category= Category::all();
+           $items = Items::all();
+       return view('item.create', compact('items','category'));
     }
+   public function store(Request $request)
+    {
+         /*return $request->all();*/
+        /* $items = new Items;
+         $items->name = $request->name;
+         $items->category_id= $request->category_id;
+         $items->model = $request->model;
+         $items->description = $request->description;
+         $items->save();
+         return $items;*/
+    /* }*/
+/*  */
+/* return $request->all();*/
+   
+         $items = new Items([
+        'name' => $request->get('name'),
+        'model'=> $request->get('model'),
+        'category_id'=>$request->get('id'),
+        'description'=> $request->get('description')
+      ]);
+      $items->save();
+      return redirect('/item')->with('success', 'item has been added');
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -50,8 +70,7 @@ class ItemsController extends Controller
     public function edit($id)
     
     {
-      $item = Items::find($id);
-
+       $item = Items::find($id);
       return view('item.edit', compact('item'));
     }
 
@@ -66,13 +85,12 @@ class ItemsController extends Controller
     {
         $request->validate([
         'name'=>'required',
-
-      ]);
+        ]);
        $item = Items::find($id);
        $item->name = $request->get('name');
-       $item->category = $request->get('category');
+       $item->category_id= $request->category_id;
        $item->model = $request->get('model');
-       $item->barcode = $request->get('barcode');
+      
        $item->description = $request->get('description');
        $item->save();
 
@@ -87,13 +105,22 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-     $item = Items::find($id);
-     $item->delete();
-
-     return redirect('/item')->with('success', 'Stock has been deleted Successfully');
+       $item = Items::find($id);
+       $item->delete();
+       return redirect('/item')->with('success', 'item has been deleted Successfully');
      }
-       /*public function fetch($name) {
-        $category = DB::table('category')->where('id', $name)->get();
-        return view('dashboard/categorydrop', compact('category'));
-     }*/
-   }
+    
+       public function deleteMultiple(Request $request){
+
+        $ids = $request->ids;
+
+       Items::whereIn('id',explode(",",$ids))->delete();
+
+        return response()->json(['status'=>true,'message'=>"Category deleted successfully."]);   
+
+    }
+    }
+
+
+
+

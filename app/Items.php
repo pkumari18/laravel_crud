@@ -9,11 +9,10 @@ class Items extends Model
 {
 	protected $table ='items';
 	
-    protected $fillable = [
-    'name',
-    'category',
-    'model',
-    'barcode',
-    'description'
-  ];
+	protected $fillable = [
+		'name',
+		'model',
+		'category_id',
+		'description'
+	];
 }

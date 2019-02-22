@@ -6,11 +6,16 @@
     margin-top: 40px;
   }
 </style>
-<div class="card uper">
-  <div class="card-header">
+   <div class="container">
+    <div class="pull-right">
+    <br>
+   <a href="{{ route('dashboard.index') }}">Back</a>
+   </div></div>
+   <div class="card uper" style="margin-left:40px;">
+    <div class="card-header" style="margin-left:40px;">
     Edit Item
-  </div>
-  <div class="card-body">
+    </div>
+    <div class="card-body">
     @if ($errors->any())
       <div class="alert alert-danger">
         <ul>
@@ -20,6 +25,8 @@
         </ul>
       </div><br />
     @endif
+
+
       <form method="post" action="{{ route('item.update', $item->id) }}">
         @method('PATCH')
         @csrf
@@ -35,10 +42,7 @@
           <label for="model">model:</label>
           <input type="text" class="form-control" name="model" value={{ $item->model }} />
          </div>
-           <div class="form-group">
-          <label for="barcode">barcode:</label>
-          <input type="text" class="form-control" name="barcode" value={{ $item->barcode }} />
-          </div>
+          
          <div class="form-group">
           <label for="description">description:</label>
           <input type="text" class="form-control" name="description" value={{ $item->description }} />

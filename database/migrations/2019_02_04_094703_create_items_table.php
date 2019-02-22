@@ -13,14 +13,14 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
-               $table->increments('id');
-               $table->string('name');
-               $table->unsignedInteger('category');
-               $table->text('description');
-               $table->string('barcode');
-               $table->timestamps();
-        });
+      Schema::create('items', function (Blueprint $table) {
+       $table->increments('id');
+       $table->string('name');
+       $table->string('model');
+       $table->unsignedInteger('category_id');
+       $table->text('description');
+       $table->timestamps();
+     });
     }
 
     /**
@@ -30,6 +30,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+      Schema::dropIfExists('items');
     }
-}
+  }

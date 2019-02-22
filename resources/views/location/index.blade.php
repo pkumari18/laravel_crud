@@ -12,10 +12,13 @@
     {{ session()->get('success') }}  
   </div><br />
   @endif
+  <div class="pull-right">
+    <a href="{{ route('dashboard.index') }}">Back</a>
+  </div>
   
-  <div class="container">
-    <a href="{{ route('dashboard.index') }}" class="btn btn-primary">Back</a><br><br>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+ <!--  <div class="container">
+   <a href="{{ route('dashboard.index') }}" class="btn btn-primary">Back</a><br><br> -->
+   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
      Create New Location
    </button>
    <br><br>
@@ -53,7 +56,7 @@
     <tr>
       <td>{{$location->id}}</td>
       <td>{{$location->name}}</td>
-      <td><a href="{{ route('location.edit',$location->id)}}"  class="glyphicon glyphicon-eye-open"></a>
+      <td><a href="{{ route('location.edit',$location->id)}}"  class="glyphicon glyphicon-pencil"  data-toggle="modal" data-target="#myModal"></a>
         <!--  <a href="{{ route('location.show', $location->id) }}"><i class="glyphicon glyphicon-eye-open"></i></a> -->
         <a href="#" 
         onClick="event.preventDefault(); 
